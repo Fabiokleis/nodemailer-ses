@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import aws from 'aws-sdk';
+import * as aws from '@aws-sdk/client-ses';
 import fs from 'fs';
 import path from 'path';
 
@@ -11,7 +11,6 @@ export async function sendmail() {
     try {
 
         let ses = new aws.SES({
-            apiVersion: "2010-12-01",
             region: 'us-east-2',
             credentials: {
                 accessKeyId: process.env.AWS_ACCESS_KEY || "" ,
@@ -44,7 +43,6 @@ export async function sendmail() {
                 console.log(info);
             }
         });
-    
     
         console.log(msg);
     } catch(e) {
